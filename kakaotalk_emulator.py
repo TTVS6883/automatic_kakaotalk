@@ -5,217 +5,342 @@ import time
 import pyperclip
 
 
-def interval_long():
-    time.sleep(6)
-
-
-def interval_middle():
-    time.sleep(2)
-
-
 def interval_short():
+
     time.sleep(0.5)
 
 
-# 카카오
-# 멀티 커맨드 활성화/비활성화
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/main0.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-interval_short
-pyautogui.hotkey('ctrl', '9')
-interval_short
+def interval_middle():
 
-# 카카오톡 앱 설정 진입
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/kakao1.png'))
-pyautogui.moveTo(pos)
-pyautogui.dragRel(3, 0, 0.5, button='left')
-
-interval_short()
-
-# 강제종료 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/kakao2.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-
-interval_short()
-
-# 확인 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/kakao3.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-
-interval_short()
-
-# 저장소 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/kakao4.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-
-interval_short()
-
-# 삭제 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/kakao5.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-
-interval_short()
-
-# 확인 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/kakao6.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-
-interval_short()
-
-# 메인화면 복귀
-pyautogui.press('esc')
-interval_short()
-pyautogui.press('esc')
-interval_short()
+    time.sleep(3)
 
 
-# 프록시
-# 프록시 실행
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/proxy1.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
+def interval_long():
 
-interval_long()
+    time.sleep(6)
 
-# 아래로 스크롤
-pyautogui.press('down', 5)
-interval_short()
 
-# 멀티 커맨드 활성화/비활성화
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/proxy0.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-interval_short
-pyautogui.hotkey('ctrl', '9')
-interval_short
+def launch_exit_kakao():
 
-# 포트 하나씩 열기
-pos_list = pyautogui.locateAllOnScreen(
-    "macro_kakaotalk/date_version/proxy2.png", confidence=0.98)
-pos_list = list(pos_list)
+    # launch kakaotalk
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_middle()
 
-for i in pos_list:
-    pos = pyautogui.center(i)
+    # exit kakaotalk
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/home_icon.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
-# 입력창 하나씩 클릭
-pos_list = pyautogui.locateAllOnScreen(
-    "macro_kakaotalk/date_version/proxy3.png", confidence=0.96)
-pos_list = list(pos_list)
 
-for i in pos_list:
-    pos = pyautogui.center(i)
+def del_kakao():
+
+    # launch kakaotalk setting
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.dragRel(3, 0, 0.5, button='left')
+    interval_short()
+
+    # click stop
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_exit.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
-    pyautogui.press('backspace', 5)
-    pyautogui.typewrite('12345')
+    interval_short()
 
-# 확인 하나씩 클릭
-pos_list = pyautogui.locateAllOnScreen(
-    "macro_kakaotalk/date_version/proxy4.png", confidence=0.98)
-pos_list = list(pos_list)
-
-for i in pos_list:
-    pos = pyautogui.center(i)
+    # click ok
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_ok1.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
+    interval_short()
+    interval_short()
 
-# 멀티 커맨드 활성화/비활성화
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/proxy0.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
-interval_short
-pyautogui.hotkey('ctrl', '9')
-interval_short
+    # click repository
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_repository.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-# 프록시 실행
-pyautogui.press('up', 5)
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/proxy5.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
+    # click delete
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_delete.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-interval_middle()
+    # click ok
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_ok2.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-# 메인화면 복귀
-pyautogui.press('esc')
-interval_short()
+    # exit kakaotalk setting
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/home_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
 
-###################
-# 심오퍼레이터 진입
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/sim1.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
+def del_proxy():
 
-interval_middle()
+    # launch proxy setting
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.dragRel(0, 3, 0.5, button='left')
+    interval_short()
 
-# IMEI 켜기
-pyautogui.press('down', 3)
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/sim2.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
+    # click repository
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_repository.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-interval_short()
+    # click delete
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_delete.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-# IMEI RANDOM 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/sim3.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
+    # click ok
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_ok1.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-interval_short()
+    # exit proxy setting
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/home_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-# Mobile No EDIT 클릭
-pyautogui.press('down', 20)
-pyautogui.press('left', 1)
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/sim4.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
 
-interval_short()
+def launch_proxy():
 
-# 입력창 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/sim5.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
+    # launch proxy
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_long()
 
-# 기존값 삭제
-pyautogui.press('backspace', 20)
+    # scrolldown
+    pyautogui.press('down', 7)
+    interval_short()
 
-interval_short()
+    # click host
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_host.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-# 번호 입력
-pyautogui.typewrite('01012345678')
+    # insert host value
+    pyautogui.typewrite('proxy.soax.com')
+    interval_short()
 
-interval_short()
+    # click ok
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_ok1.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
 
-# 확인 클릭
-pos = pyautogui.center(pyautogui.locateOnScreen(
-    'macro_kakaotalk/date_version/sim6.png'))
-pyautogui.moveTo(pos)
-pyautogui.click()
+    # scrolldown
+    pyautogui.press('down', 5)
+    interval_short()
 
-pyautogui.typewrite('12345')
+    # click port
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_port1.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # click input
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_input.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # delete default value
+    pyautogui.press('backspace', 10)
+
+    # deactivate multicommand
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_port2.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short
+    pyautogui.hotkey('ctrl', '9')
+    interval_short
+
+    # insert port value
+    pos_list = pyautogui.locateAllOnScreen(
+        "macro_kakaotalk/date_version/images/proxy_port2.png", confidence=0.88)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+        pyautogui.typewrite('56789')
+
+    interval_short()
+
+    # active multicommand
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_port2.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short
+    pyautogui.hotkey('ctrl', '9')
+    interval_short
+
+    # click ok
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_ok2.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # scrollup
+    pyautogui.press('up', 7)
+
+    # active proxy
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_active.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # exit proxy
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/home_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+
+def launch_sim():
+
+    # launch sim operator
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_icon.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_middle()
+
+    # active IMEI
+    pyautogui.press('down', 3)
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_active.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # click random/refresh
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_random.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # click mobile_no edit
+    pyautogui.press('down', 20)
+    pyautogui.press('left', 1)
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_edit1.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # click input
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_input.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # delete default value
+    pyautogui.press('backspace', 25)
+    interval_short()
+
+    # deactive multicommand
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_mobile.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short
+    pyautogui.hotkey('ctrl', '9')
+    interval_short
+
+    # insert mobile_no value
+    pos_list = pyautogui.locateAllOnScreen(
+        "macro_kakaotalk/date_version/images/sim_mobile.png", confidence=0.88)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+        pyautogui.typewrite('1234567891')
+
+    interval_short()
+
+    # active multicommand
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_mobile.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short
+    pyautogui.hotkey('ctrl', '9')
+    interval_short
+
+    # click save
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_save.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # click sim operator edit
+    pyautogui.press('down', 30)
+    pyautogui.press('up', 2)
+    pyautogui.press('left', 1)
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_edit2.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # click country
+    pyautogui.press('down', 2)
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/sim_country.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+
+launch_exit_kakao()
+del_kakao()
+del_proxy()
+launch_proxy()
+launch_sim()
