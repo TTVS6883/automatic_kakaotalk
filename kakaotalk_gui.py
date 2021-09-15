@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter.ttk as ttk
 
 # values
-global country_list, main_country_value
+global country_list
 main_country_list = ['Europe', 'Asia',
                      'Africa', 'North America', 'South America']
 europe_list = ['Russia', 'Ukraine', 'Poland', 'England', 'Ireland', 'Serbia', 'Romania', 'Estonia', 'Germany', 'Lithuania', 'Croatia', 'Sweden', 'Netherlands', 'Latvia', 'Austria', 'Belarus', 'Spain', 'Slovenia', 'Czech', 'Cyprus', 'France',
@@ -19,8 +19,6 @@ device_var_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
 
 def set_country_list():
-
-    global main_country_value
 
     country_list = []
 
