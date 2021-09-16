@@ -21,38 +21,44 @@ import time
 
 # 변수 선언
 global country_list, country, device, delay_page_var, delay_sms_var
-main_country_list = ['Africa', 'Asia', 'Europe', 'North America', 'South America']
+main_country_list = ['Africa', 'Asia',
+                     'Europe', 'North America', 'South America']
 # ['Europe', 'Asia', 'Africa', 'North America', 'South America']
-europe_list = ['Albania', 'Austria', 'Belarus', 'Belgium', 'Bosnia', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech', 'Denmark', 'England', 'Estonia', 'Finland', 'France', 'Georgia', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'Northmacedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine']
+europe_list = ['Albania', 'Austria', 'Belarus', 'Belgium', 'Bosnia', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech', 'Denmark', 'England', 'Estonia', 'Finland', 'France', 'Georgia', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy',
+               'Latvia', 'Lithuania', 'Luxembourg', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'Northmacedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine']
 # ['Russia', 'Ukraine', 'Poland', 'England', 'Ireland', 'Serbia', 'Romania', 'Estonia', 'Germany', 'Lithuania', 'Croatia', 'Sweden', 'Netherlands', 'Latvia', 'Austria', 'Belarus', 'Spain', 'Slovenia', 'Czech', 'Cyprus', 'France', 'Belgium', 'Bulgaria', 'Hungary', 'Moldova', 'Italy', 'Bosnia', 'Portugal', 'Georgia', 'Greece', 'Iceland', 'Slovakia', 'Monaco', 'Albania', 'Finland', 'Luxembourg', 'Montenegro', 'Denmark', 'Switzerland', 'Norway', 'Northmacedonia']
-asia_list = ['Afghanistan', 'Armenia', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei', 'Cambodia', 'China', 'HongKong', 'India', 'Indonesia', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Lebanon', 'Macao', 'Malaysia', 'Maldives', 'Mongolia', 'Myanmar', 'Nepal', 'Newzealand', 'Oman', 'Pakistan', 'Papua', 'Philippines', 'Qatar', 'Saudiarabia', 'Southkorea', 'Srilanka', 'Taiwan', 'Tajikistan', 'Thailand', 'Timorleste', 'Turkey', 'Turkmenistan', 'Uae', 'Uzbekistan', 'Vietnam', 'Yemen']
+asia_list = ['Afghanistan', 'Armenia', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei', 'Cambodia', 'China', 'HongKong', 'India', 'Indonesia', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Lebanon', 'Macao', 'Malaysia', 'Maldives',
+             'Mongolia', 'Myanmar', 'Nepal', 'Newzealand', 'Oman', 'Pakistan', 'Papua', 'Philippines', 'Qatar', 'Saudiarabia', 'Southkorea', 'Srilanka', 'Taiwan', 'Tajikistan', 'Thailand', 'Timorleste', 'Turkey', 'Turkmenistan', 'Uae', 'Uzbekistan', 'Vietnam', 'Yemen']
 # ['Kazakhstan', 'China', 'Philippines', 'Myanmar', 'Indonesia', 'Malaysia', 'Vietnam', 'Kyrgyzstan', 'Israel', 'HongKong', 'Macao', 'India', 'Cambodia', 'Laos', 'Yemen', 'Uzbekistan', 'Iraq', 'Thailand', 'Saudiarabia', 'Taiwan', 'Bangladesh', 'Turkey', 'Srilanka', 'Pakistan', 'Newzealand', 'Mongolia', 'Afghanistan', 'Papua', 'Nepal', 'Timorleste', 'Uae', 'Kuwait', 'Oman', 'Qatar', 'Jordan', 'Brunei', 'Tajikistan', 'Bahrain', 'Armenia', 'Lebanon', 'Bhutan', 'Maldives', 'Turkmenistan', 'Japan', 'Southkorea']
-africa_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burundi', 'Caf', 'Cameroon', 'Capeverde', 'Chad', 'Comoros', 'Congo', 'DCongo', 'Djibouti', 'Egypt', 'Equatorialguinea', 'Eritrea', 'Ethiopia', 'Furkinafaso', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guineabissau', 'Ivory', 'Kenya', 'Lesotho', 'Liberia', 'Libyan', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Reunion', 'Rwanda', 'Saotomeandprincipe', 'Senegal', 'Seychelles', 'Sierraleone', 'Somalia', 'Southafrica', 'Southsudan', 'Swaziland', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe']
+africa_list = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burundi', 'Caf', 'Cameroon', 'Capeverde', 'Chad', 'Comoros', 'Congo', 'DCongo', 'Djibouti', 'Egypt', 'Equatorialguinea', 'Eritrea', 'Ethiopia', 'Furkinafaso', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guineabissau', 'Ivory', 'Kenya', 'Lesotho', 'Liberia',
+               'Libyan', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Reunion', 'Rwanda', 'Saotomeandprincipe', 'Senegal', 'Seychelles', 'Sierraleone', 'Somalia', 'Southafrica', 'Southsudan', 'Swaziland', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe']
 # ['Kenya', 'Tanzania', 'DCongo', 'Nigeria', 'Egypt', 'Ivory', 'Gambia', 'Southafrica', 'Morocco', 'Ghana', 'Cameroon', 'Chad', 'Algeria', 'Senegal', 'Guinea', 'Mali', 'Ethiopia', 'Uganda', 'Angola', 'Mozambique', 'Tunisia', 'Zimbabwe', 'Togo', 'Libyan', 'Swaziland', 'Mauritania', 'Sierraleone', 'Burundi', 'Benin', 'Botswana', 'Caf', 'Guineabissau', 'Comoros', 'Liberia', 'Lesotho', 'Malawi', 'Namibia', 'Niger', 'Rwanda', 'Reunion', 'Zambia', 'Somalia', 'Congo', 'Furkinafaso', 'Gabon', 'Mauritius', 'Equatorialguinea', 'Djibouti', 'Eritrea', 'Southsudan', 'Saotomeandprincipe', 'Seychelles', 'Capeverde']
-north_america_list = ['Anguilla', 'Antiguabarbuda', 'Aruba', 'Bahamas', 'Barbados', 'Belize', 'Canada', 'Caymanislands', 'Costarica', 'Dominica', 'Grenada', 'Guadeloupe', 'Guatemala', 'Honduras', 'Jamaica', 'Mexico', 'Montserrat', 'Nicaragua', 'Panama', 'Puertorico', 'Saintkitts', 'Saintlucia', 'Salvador', 'USA', 'USA (virtual)']
+north_america_list = ['Anguilla', 'Antiguabarbuda', 'Aruba', 'Bahamas', 'Barbados', 'Belize', 'Canada', 'Caymanislands', 'Costarica', 'Dominica', 'Grenada', 'Guadeloupe',
+                      'Guatemala', 'Honduras', 'Jamaica', 'Mexico', 'Montserrat', 'Nicaragua', 'Panama', 'Puertorico', 'Saintkitts', 'Saintlucia', 'Salvador', 'USA', 'USA (virtual)']
 # ['USA (virtual)', 'Canada', 'Mexico', 'Honduras', 'Nicaragua', 'Costarica', 'Guatemala', 'Puertorico', 'Salvador', 'Jamaica', 'Panama', 'Barbados', 'Bahamas', 'Belize', 'Dominica', 'Grenada', 'Saintkitts', 'Guadeloupe', 'Saintlucia', 'Antiguabarbuda', 'Caymanislands', 'Aruba', 'Montserrat', 'Anguilla', 'USA']
-south_america_list = ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Dominican', 'Ecuador', 'Frenchguiana', 'Guyana', 'Haiti', 'Paraguay', 'Peru', 'Saintvincentgrenadines', 'Suriname', 'Trinidad', 'Uruguay', 'Venezuela']
+south_america_list = ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Dominican', 'Ecuador', 'Frenchguiana',
+                      'Guyana', 'Haiti', 'Paraguay', 'Peru', 'Saintvincentgrenadines', 'Suriname', 'Trinidad', 'Uruguay', 'Venezuela']
 # ['Haiti', 'Colombia', 'Argentina', 'Peru', 'Venezuela', 'Brazil', 'Paraguay', 'Bolivia', 'Trinidad', 'Ecuador', 'Dominican', 'Guyana', 'Suriname', 'Chile', 'Uruguay', 'Frenchguiana', 'Saintvincentgrenadines']
 device_var_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
 
 # 함수 선언 (에뮬레이터)
-def interval_short(): # 대기시간 0.5초
+def interval_short():  # 대기시간 0.5초
 
     time.sleep(0.5)
 
 
-def interval_middle(): # 대기시간 3초
+def interval_middle():  # 대기시간 3초
 
     time.sleep(3)
 
 
-def interval_long(): # 대기시간 6초
+def interval_long():  # 대기시간 6초
 
     time.sleep(6)
 
 
-def launch_kakao(): # 카카오톡 실행 및 종료
+def launch_kakao():  # 카카오톡 실행 및 종료
 
     # 카카오톡 실행
     pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -69,7 +75,7 @@ def launch_kakao(): # 카카오톡 실행 및 종료
     interval_short()
 
 
-def del_kakao(): # 카카오톡 강제종료 및 데이터 삭제
+def del_kakao():  # 카카오톡 강제종료 및 데이터 삭제
 
     # 카카오톡 앱 정보 실행
     pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -123,7 +129,7 @@ def del_kakao(): # 카카오톡 강제종료 및 데이터 삭제
     interval_short()
 
 
-def del_proxy(): # 프록시 데이터 삭제
+def del_proxy():  # 프록시 데이터 삭제
 
     # 프록시 앱 정보 실행
     pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -161,7 +167,7 @@ def del_proxy(): # 프록시 데이터 삭제
     interval_short()
 
 
-def launch_proxy(): # 프록시 실행 및 설정
+def launch_proxy():  # 프록시 실행 및 설정
 
     global minimum_port
 
@@ -303,7 +309,7 @@ def launch_proxy(): # 프록시 실행 및 설정
     interval_short()
 
 
-def launch_sim(): # 디바이스 에뮬레이터 실행 및 설정
+def launch_sim():  # 디바이스 에뮬레이터 실행 및 설정
 
     global phone_list
 
@@ -315,7 +321,7 @@ def launch_sim(): # 디바이스 에뮬레이터 실행 및 설정
     interval_middle()
 
     # IMEI 활성화 / 예외처리
-    try: # IMEI 비활성화 상태인 경우
+    try:  # IMEI 비활성화 상태인 경우
 
         # IMEI 활성화
         pyautogui.press('down', 3)
@@ -325,7 +331,7 @@ def launch_sim(): # 디바이스 에뮬레이터 실행 및 설정
         pyautogui.click()
         interval_short()
 
-    except TypeError: # IMEI 활성화 상태인 경우
+    except TypeError:  # IMEI 활성화 상태인 경우
 
         pass
 
@@ -415,7 +421,7 @@ def launch_sim(): # 디바이스 에뮬레이터 실행 및 설정
     interval_short()
 
 
-def exit_sim(): # 디바이스 에뮬레이터 국가 설정 저장
+def exit_sim():  # 디바이스 에뮬레이터 국가 설정 저장
 
     run_selenium()
 
@@ -435,7 +441,7 @@ def exit_sim(): # 디바이스 에뮬레이터 국가 설정 저장
     interval_short()
 
 
-def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카카오톡 실행, 권한허용, 회원가입 진입
+def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, 카카오톡 실행, 권한허용, 회원가입 진입
 
     # launch_sim() 종료 후 exit_sim()으로 설정 저장 및 홈 화면 복귀
     exit_sim()
@@ -458,7 +464,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
 
     device = device_var_combobox.get()
     device_count = int(device)
-   
+
     while allow_bool:
 
         try:
@@ -498,7 +504,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
         pos = pyautogui.center(i)
         pyautogui.moveTo(pos)
         pyautogui.click()
-    
+
     interval_short()
 
     # 전화 걸기 및 관리 허용 클릭
@@ -511,7 +517,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
         pos = pyautogui.center(i)
         pyautogui.moveTo(pos)
         pyautogui.click()
-    
+
     interval_short()
 
     # 기기 사진, 미디어, 파일 액세스 허용 클릭
@@ -524,7 +530,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
         pos = pyautogui.center(i)
         pyautogui.moveTo(pos)
         pyautogui.click()
-    
+
     interval_short()
 
     # 주소록 액세스 허용 클릭
@@ -537,13 +543,13 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
         pos = pyautogui.center(i)
         pyautogui.moveTo(pos)
         pyautogui.click()
-    
+
     interval_short()
 
     # 가입화면 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -578,7 +584,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 이용약관 페이지 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -700,7 +706,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
             allow_bool = False
 
     # 전화번호 확인 클릭
-    try: # 확인 버튼 나오는 경우
+    try:  # 확인 버튼 나오는 경우
 
         # 확인 클릭
         pos_list = pyautogui.locateAllOnScreen(
@@ -715,7 +721,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
 
         interval_short()
 
-    except TypeError: # [필수]16세 이상 이용자입니다 나오는 경우
+    except TypeError:  # [필수]16세 이상 이용자입니다 나오는 경우
 
         # [필수]16세 이상 이용자입니다 클릭
         pos_list = pyautogui.locateAllOnScreen(
@@ -790,7 +796,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 인증번호 입력 페이지 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -817,14 +823,14 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 인증번호 가져오기
     get_sms()
 
-    #인증번호 입력 (절대값 버전)
+    # 인증번호 입력 (절대값 버전)
     sms_list_index = 0
 
     pyautogui.moveTo(90, 132)
     pyautogui.click()
     pyautogui.typewrite(sms_list[sms_list_index])
     time.sleep(0.1)
-    
+
     sms_list_index += 1
 
     for_var = device_count - 1
@@ -832,14 +838,14 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     if for_var > 7:
 
         for i in range(7):
-        
+
             pyautogui.dragRel(240)
             pyautogui.click()
             pyautogui.typewrite(sms_list[sms_list_index])
-            time.sleep(0.1)       
+            time.sleep(0.1)
 
             sms_list_index += 1
-        
+
         pyautogui.moveTo(90, 470)
         pyautogui.click()
         pyautogui.typewrite(sms_list[sms_list_index])
@@ -852,18 +858,18 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
             pyautogui.dragRel(240)
             pyautogui.click()
             pyautogui.typewrite(sms_list[sms_list_index])
-            time.sleep(0.1)       
+            time.sleep(0.1)
 
             sms_list_index += 1
 
     elif for_var <= 7:
 
         for i in range(for_var):
-        
+
             pyautogui.dragRel(240)
             pyautogui.click()
             pyautogui.typewrite(sms_list[sms_list_index])
-            time.sleep(0.1)       
+            time.sleep(0.1)
 
             sms_list_index += 1
 
@@ -884,7 +890,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     #     pyautogui.typewrite("1123")
     #     sms_list_index += 1
 
-    # interval_short()    
+    # interval_short()
 
     # 확인 클릭
     page_var = 0
@@ -905,7 +911,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 비밀번호 입력 페이지 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -949,7 +955,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
 
         pos = pyautogui.center(i)
         pyautogui.moveTo(pos)
-        pyautogui.click() 
+        pyautogui.click()
         time.sleep(0.1)
         pyautogui.typewrite("abcabc12!")
         time.sleep(0.1)
@@ -975,7 +981,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 프로필 화면 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -1008,7 +1014,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
         pyautogui.typewrite("abcabc12!")
         time.sleep(0.1)
 
-    interval_short()   
+    interval_short()
 
     # 주소록 친구 자동 추가 해제 클릭
     pos_list = pyautogui.locateAllOnScreen(
@@ -1019,7 +1025,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
 
         pos = pyautogui.center(i)
         pyautogui.moveTo(pos)
-        pyautogui.click()    
+        pyautogui.click()
 
     interval_short()
 
@@ -1055,7 +1061,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 이메일 등록 화면 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -1093,7 +1099,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 카톡 홈 화면 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -1157,7 +1163,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     # 오픈채팅 리스트 페이지 넘어갔는지 확인
     start_time = datetime.now()
     allow_bool = True
-   
+
     while allow_bool:
 
         try:
@@ -1176,23 +1182,22 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
         if datetime.now() - start_time > timedelta(seconds=delay_page_var):
             allow_bool = False
 
-
     # 오픈채팅 입장
     device = device_var_combobox.get()
     device_count = int(device)
 
     pyautogui.moveTo(90, 320)
-    pyautogui.click()    
+    pyautogui.click()
 
     for_var = device_count - 1
 
     if for_var > 7:
 
         for i in range(7):
-        
+
             pyautogui.dragRel(240)
             pyautogui.click()
-        
+
         pyautogui.moveTo(90, 660)
         pyautogui.click()
 
@@ -1204,7 +1209,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     elif for_var <= 7:
 
         for i in range(for_var):
-        
+
             pyautogui.dragRel(240)
             pyautogui.click()
 
@@ -1212,7 +1217,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
 
 
 # 함수 선언 (셀레니움)
-def run_chrome(): # 크롬 실행
+def run_chrome():  # 크롬 실행
 
     os.chdir('C:\Program Files\Google\Chrome\Application')
     os.system(
@@ -1220,20 +1225,20 @@ def run_chrome(): # 크롬 실행
     return 0
 
 
-def run_selenium(): # 셀레니움 실행
+def run_selenium():  # 셀레니움 실행
 
     global driver
 
     chrome_options = Options()
     chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
     chrome_driver = "chromedriver.exe"
-    
+
     driver = webdriver.Chrome(
         executable_path=chrome_driver, options=chrome_options)
     driver.implicitly_wait(10)
 
 
-def check_port(): # 포트 존재여부 확인
+def check_port():  # 포트 존재여부 확인
 
     global driver, soup, port_list, country, bool_port
 
@@ -1247,7 +1252,7 @@ def check_port(): # 포트 존재여부 확인
 
     soup = BeautifulSoup(driver.page_source, "lxml")
 
-    bool_port = False # 포트 미존재
+    bool_port = False  # 포트 미존재
     rows = soup.find_all("div", {"class": "sx-form__item ip-port"})
     country_lower = country.lower()
 
@@ -1260,12 +1265,12 @@ def check_port(): # 포트 존재여부 확인
 
         if (country_lower == row_country):
 
-            bool_port = True # 포트 존재
+            bool_port = True  # 포트 존재
 
     return bool_port
 
 
-def get_number(): # 전화번호 가져오기
+def get_number():  # 전화번호 가져오기
 
     global driver, soup, phone_list
 
@@ -1280,7 +1285,7 @@ def get_number(): # 전화번호 가져오기
         phone_list.append(row["value"])
 
 
-def get_sms(): # 인증번호 가져오기
+def get_sms():  # 인증번호 가져오기
 
     global driver, soup, sms_list
 
@@ -1294,7 +1299,7 @@ def get_sms(): # 인증번호 가져오기
         sms_list.append(row.get_text())
 
 
-def get_port(): # 포트 가져오기
+def get_port():  # 포트 가져오기
 
     global driver, soup, port_list, country, minimum_port
 
@@ -1326,7 +1331,7 @@ def get_port(): # 포트 가져오기
             minimum_port = port_list[1][:5]
 
 
-def add_phone(): # 전화번호 생성
+def add_phone():  # 전화번호 생성
 
     global driver, country, device
 
@@ -1375,7 +1380,7 @@ def add_phone(): # 전화번호 생성
     time.sleep(2)
 
 
-def add_port(): # 포트 생성, SMS 사이트와 PROXY 사이트 간의 이름 변환
+def add_port():  # 포트 생성, SMS 사이트와 PROXY 사이트 간의 이름 변환
 
     global driver, country, device
 
@@ -1428,7 +1433,7 @@ def add_port(): # 포트 생성, SMS 사이트와 PROXY 사이트 간의 이름 
 
 
 # 함수 선언 (GUI-tkinter))
-def set_country_list(): # 대륙별 나라 콤보박스 변경
+def set_country_list():  # 대륙별 나라 콤보박스 변경
 
     country_list = []
 
@@ -1455,7 +1460,7 @@ def set_country_list(): # 대륙별 나라 콤보박스 변경
     country_list_combobox['values'] = country_list
 
 
-def add_set(): # 번호/포트 생성 및 설정 통합
+def add_set():  # 번호/포트 생성 및 설정 통합
 
     global country, device, driver, minimum_port
     country = country_list_combobox.get()
@@ -1469,41 +1474,42 @@ def add_set(): # 번호/포트 생성 및 설정 통합
 
     driver.get("https://dashboard.soax.com/proxy")
 
-    if check_port(): # 포트 존재시
+    if check_port():  # 포트 존재시
 
-        get_port() # 포트 가져오기
+        get_port()  # 포트 가져오기
 
-    else: # 포트 미존재시
+    else:  # 포트 미존재시
 
-        add_port() # 포트 생성
+        add_port()  # 포트 생성
 
         driver.get("https://dashboard.soax.com/proxy")
 
         # ip address click
         elem = driver.find_element_by_css_selector(
-        'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
+            'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
         ActionChains(driver).click(elem).perform()
 
-        get_port() # 포트 가져오기
-        
-    driver.get("https://sms-activate.ru/en/getNumber") # 추후 인증번호 가져오기를 위해 페이지 이동
+        get_port()  # 포트 가져오기
+
+    # 추후 인증번호 가져오기를 위해 페이지 이동
+    driver.get("https://sms-activate.ru/en/getNumber")
 
     print(minimum_port)
 
-    launch_kakao() # 카카오톡 실행 및 종료
+    launch_kakao()  # 카카오톡 실행 및 종료
 
-    del_kakao() # 카카오톡 강제종료 및 데이터 삭제
+    del_kakao()  # 카카오톡 강제종료 및 데이터 삭제
 
-    del_proxy() # 프록시 데이터 삭제
+    del_proxy()  # 프록시 데이터 삭제
 
-    launch_proxy() # 프록시 실행 및 설정
+    launch_proxy()  # 프록시 실행 및 설정
 
-    get_number() # 전화번호 가져오기
+    get_number()  # 전화번호 가져오기
 
-    launch_sim() # 디바이스 에뮬레이터 실행 및 설정
+    launch_sim()  # 디바이스 에뮬레이터 실행 및 설정
 
 
-def add_set1(): # 번호/포트 생성
+def add_set1():  # 번호/포트 생성
 
     global country, device, driver, minimum_port
     country = country_list_combobox.get()
@@ -1517,29 +1523,30 @@ def add_set1(): # 번호/포트 생성
 
     driver.get("https://dashboard.soax.com/proxy")
 
-    if check_port(): # 포트 존재시
+    if check_port():  # 포트 존재시
 
-        get_port() # 포트 가져오기
+        get_port()  # 포트 가져오기
 
-    else: # 포트 미존재시
+    else:  # 포트 미존재시
 
-        add_port() # 포트 생성
+        add_port()  # 포트 생성
 
         driver.get("https://dashboard.soax.com/proxy")
 
         # ip address click
         elem = driver.find_element_by_css_selector(
-        'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
+            'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
         ActionChains(driver).click(elem).perform()
 
-        get_port() # 포트 가져오기
-        
-    driver.get("https://sms-activate.ru/en/getNumber") # 추후 인증번호 가져오기를 위해 페이지 이동
+        get_port()  # 포트 가져오기
+
+    # 추후 인증번호 가져오기를 위해 페이지 이동
+    driver.get("https://sms-activate.ru/en/getNumber")
 
     print(minimum_port)
 
 
-def add_set2(): # 번호/포트 설정
+def add_set2():  # 번호/포트 설정
 
     global country, device, driver, minimum_port
     country = country_list_combobox.get()
@@ -1547,17 +1554,17 @@ def add_set2(): # 번호/포트 설정
 
     run_selenium()
 
-    launch_kakao() # 카카오톡 실행 및 종료
+    launch_kakao()  # 카카오톡 실행 및 종료
 
-    del_kakao() # 카카오톡 강제종료 및 데이터 삭제
+    del_kakao()  # 카카오톡 강제종료 및 데이터 삭제
 
-    del_proxy() # 프록시 데이터 삭제
+    del_proxy()  # 프록시 데이터 삭제
 
-    launch_proxy() # 프록시 실행 및 설정
+    launch_proxy()  # 프록시 실행 및 설정
 
-    get_number() # 전화번호 가져오기
+    get_number()  # 전화번호 가져오기
 
-    launch_sim() # 디바이스 에뮬레이터 실행 및 설정
+    launch_sim()  # 디바이스 에뮬레이터 실행 및 설정
 
 
 # GUI-tkinter 구성 및 실행
@@ -1619,7 +1626,7 @@ frame_option1.pack(fill="x")
 delay_page_var_label = Label(frame_option1, text="페이지 전환 대기시간", width=18)
 delay_page_var_label.pack(side="left")
 
-delay_page_var_list = ['10', '15', '20', '25', '30'] 
+delay_page_var_list = ['10', '15', '20', '25', '30']
 delay_page_var_combobox = ttk.Combobox(
     frame_option1, height=20, state="readonly", values=delay_page_var_list, width=40)
 delay_page_var_combobox.current(2)
@@ -1644,13 +1651,16 @@ delay_sms_var = int(delay_sms_var_combobox.get())
 frame_bottom = LabelFrame(frame_main, text="실행")
 frame_bottom.pack(fill="x", padx=5, pady=5)
 
-btn1 = Button(frame_bottom, text="번호/포트 생성", command=add_set1, width=16, bg="#99CCFF")
+btn1 = Button(frame_bottom, text="번호/포트 생성",
+              command=add_set1, width=16, bg="#99CCFF")
 btn1.pack(side="left", padx=5, pady=5)
 
-btn2 = Button(frame_bottom, text="번호/포트 설정", command=add_set2, width=16, bg="#99CCFF")
+btn2 = Button(frame_bottom, text="번호/포트 설정",
+              command=add_set2, width=16, bg="#99CCFF")
 btn2.pack(side="left", padx=5, pady=5)
 
-btn3 = Button(frame_bottom, text="카카오톡 가입", command=register_kakao_1, width=16, bg="#99CCFF")
+btn3 = Button(frame_bottom, text="카카오톡 가입",
+              command=register_kakao_1, width=16, bg="#99CCFF")
 btn3.pack(side="left", padx=5, pady=5)
 
 # GUI 실행
