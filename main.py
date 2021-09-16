@@ -1455,7 +1455,7 @@ def set_country_list(): # 대륙별 나라 콤보박스 변경
     country_list_combobox['values'] = country_list
 
 
-def add_set():
+def add_set(): # 번호/포트 생성 및 설정 통합
 
     global country, device, driver, minimum_port
     country = country_list_combobox.get()
@@ -1608,11 +1608,11 @@ device_var_combobox = ttk.Combobox(
 device_var_combobox.pack(side="left", fill="x", padx=5, pady=5)
 device = device_var_combobox.get()
 
-# 옵션 프레임
+# 상단 옵션 프레임
 frame_delay = frame_bottom = LabelFrame(frame_top, text="대기시간")
 frame_delay.pack(fill="x", padx=5, pady=5)
 
-# 옵션 페이지 딜레이 프레임
+# 옵션 페이지 전환 대기시간 프레임
 frame_option1 = frame_bottom = Frame(frame_delay)
 frame_option1.pack(fill="x")
 
@@ -1626,7 +1626,7 @@ delay_page_var_combobox.current(2)
 delay_page_var_combobox.pack(side="left", fill="x", padx=5, pady=5)
 delay_page_var = int(delay_page_var_combobox.get())
 
-# 옵션 sms 딜레이 프레임
+# 옵션 SMS 인증 대기시간 프레임
 frame_option2 = frame_bottom = Frame(frame_delay)
 frame_option2.pack(fill="x")
 
