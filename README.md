@@ -1,5 +1,5 @@
 # automatic_kakaotalk
-automatic sign in for kakaotalk using ld and python.
+automatic sign up for kakaotalk using ld and python.
 
 # started date
 2021-09-06
