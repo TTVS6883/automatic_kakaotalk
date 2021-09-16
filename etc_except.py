@@ -5,16 +5,12 @@ import os
 from math import pi
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common import keys
-from selenium.webdriver.common import action_chains
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.action_chains import ActionChains
 from time import time
 import pyautogui
-import keyboard
 import time
-import pyperclip
 
 # cmd cd C:\Program Files\Google\Chrome\Application
 # cmd chrome.exe --remote-debugging-port=9222 --user-data-dir="C:/ChromeTemp"
@@ -53,7 +49,7 @@ def interval_long(): # 대기시간 6초
 
 
 def launch_kakao(): # 카카오톡 실행 및 종료
-    
+
     # 카카오톡 실행
     pos = pyautogui.center(pyautogui.locateOnScreen(
         'macro_kakaotalk/date_version/images/kakao_icon.png', confidence=0.88))
@@ -169,7 +165,13 @@ def launch_proxy(): # 프록시 실행 및 설정
         'macro_kakaotalk/date_version/images/proxy_icon.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
-    interval_long()
+    interval_middle()
+
+    # 1번 에뮬레이터 클릭
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_label.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
 
     # 하단 스크롤
     pyautogui.press('down', 7)
@@ -247,8 +249,10 @@ def launch_proxy(): # 프록시 실행 및 설정
     interval_short()
 
     # 확인 클릭
+    pyautogui.press('down')
+    pyautogui.press('right')
     pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/proxy_ok2.png', confidence=0.88))
+        'macro_kakaotalk/date_version/images/proxy_ok1.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
@@ -256,12 +260,34 @@ def launch_proxy(): # 프록시 실행 및 설정
     # 상단 스크롤
     pyautogui.press('up', 7)
 
-    # 프록시 Enable
+    # 멀티커맨드 비활성화
     pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/proxy_active.png', confidence=0.88))
+        'macro_kakaotalk/date_version/images/proxy_label.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
+    interval_short()
+
+    # 프록시 Enable / 광고 나오는 경우 때문에 locateAllOnScreen으로 처리
+    pos_list = pyautogui.locateAllOnScreen(
+        "macro_kakaotalk/date_version/images/proxy_active.png", confidence=0.88)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
     interval_middle()
+
+    # 멀티커맨드 활성화
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/proxy_label.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
+    interval_short()
 
     # 홈 화면 복귀
     pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -282,13 +308,20 @@ def launch_sim(): # 디바이스 에뮬레이터 실행 및 설정
     pyautogui.click()
     interval_middle()
 
-    # IMEI 활성화
-    pyautogui.press('down', 3)
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/sim_active.png', confidence=0.88))
-    pyautogui.moveTo(pos)
-    pyautogui.click()
-    interval_short()
+    # IMEI 활성화 / 예외처리
+    try: # IMEI 비활성화 상태인 경우
+
+        # IMEI 활성화
+        pyautogui.press('down', 3)
+        pos = pyautogui.center(pyautogui.locateOnScreen(
+            'macro_kakaotalk/date_version/images/sim_active.png', confidence=0.88))
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+        interval_short()
+
+    except TypeError: # IMEI 활성화 상태인 경우
+
+        pass
 
     # 랜덤 클릭
     pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -405,7 +438,7 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
     pyautogui.click()
     interval_middle()
 
-    # 권한허용 클릭
+    # 허용하기 클릭
     pyautogui.press('down', 5)
     pos = pyautogui.center(pyautogui.locateOnScreen(
         'macro_kakaotalk/date_version/images/kakao_allow1.png', confidence=0.88))
@@ -446,41 +479,76 @@ def register_kakao_1(): # 디바이스 에뮬레이터 국가 설정 저장, 카
 
 def register_kakao_2(): # 약관동의, 전화번호 확인, 인증번호 전송
 
-    # 만 14세 이상입니다 클릭
+    # # 1번 에뮬레이터 이동
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_allow_main.png', confidence=0.88))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+
+    # 모두 동의합니다 클릭
     pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_allow3_1.png', confidence=0.88))
+        'macro_kakaotalk/date_version/images/kakao_allow3.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
-    # [필수]카카오계정 약관 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_allow3_2.png', confidence=0.84))
-    pyautogui.moveTo(pos)
-    pyautogui.click()
-    interval_short()
-
-    # [필수]카카오계정 통합서비스 약관 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_allow3_3.png', confidence=0.88))
-    pyautogui.moveTo(pos)
-    pyautogui.click()
-    interval_short()
-
-    # [필수]개인정보 수집 및 이용 동의 클릭
+    # 하단 스크롤
     pyautogui.press('down', 10)
+
+    # 선택항목 해제
     pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_allow3_4.png', confidence=0.88))
+    'macro_kakaotalk/date_version/images/kakao_allow3_5.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
-    interval_short()
+    time.sleep(0.6)
+
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+    'macro_kakaotalk/date_version/images/kakao_allow3_6.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    time.sleep(0.6)
+
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+    'macro_kakaotalk/date_version/images/kakao_allow3_7.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    time.sleep(0.6)
+
+    # # 만 14세 이상입니다 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_allow3_1.png', confidence=0.8))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
+    # # [필수]카카오계정 약관 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_allow3_2.png', confidence=0.8))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
+    # # [필수]카카오계정 통합서비스 약관 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_allow3_3.png', confidence=0.8))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
+    # # [필수]개인정보 수집 및 이용 동의 클릭
+    # pyautogui.press('down', 10)
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_allow3_4.png', confidence=0.8))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 동의하고 계속 진행합니다 클릭
     pos = pyautogui.center(pyautogui.locateOnScreen(
         'macro_kakaotalk/date_version/images/kakao_allow7.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
-    interval_middle()
+    time.sleep(10)
 
     # 전화번호 확인 클릭
     try: # 확인 버튼 나오는 경우
@@ -508,31 +576,71 @@ def register_kakao_2(): # 약관동의, 전화번호 확인, 인증번호 전송
         pyautogui.click()
         interval_short()
 
-    # 인증번호 전송 확인 클릭
+    # 멀티커맨드 비활성화
     pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_ok4.png', confidence=0.88))
+        'macro_kakaotalk/date_version/images/kakao_label.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
+    interval_short()
 
+    # 인증번호 전송 확인 클릭
+    pos_list = pyautogui.locateAllOnScreen(
+        "macro_kakaotalk/date_version/images/kakao_ok4.png", confidence=0.88)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
+    interval_middle()
+
+    # # 인증번호 전송 확인 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_ok4.png', confidence=0.88))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_middle()
+
+    # 인증요청 제한횟수 초과 예외처리
+    try: # 인증요청 제한횟수 나오는 경우
+
+        # 확인 클릭
+        pos_list = pyautogui.locateAllOnScreen(
+            "macro_kakaotalk/date_version/images/kakao_ok4.png", confidence=0.88)
+        pos_list = list(pos_list)
+
+        for i in pos_list:
+
+            pos = pyautogui.center(i)
+            pyautogui.moveTo(pos)
+            pyautogui.click()
+
+    except TypeError: # 인증요청 제한횟수 없는 경우
+
+        pass
+    
 
 def register_kakao_3(): # 인증번호 입력, 비밀번호 설정, 프로필 설정, 가입 완료
 
     global sms_list
 
-    # 멀티커맨드 비활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_input1.png', confidence=0.88))
-    pyautogui.moveTo(pos)
-    pyautogui.click()
-    pyautogui.hotkey('ctrl', '9')
-    interval_short()
+    # # 멀티커맨드 비활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_input1.png', confidence=0.88))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
 
     # 인증번호 가져오기
     get_sms()
 
     # 인증번호 입력 (화면 선택 갯수에 따른 인덱스 값 조정방법 생각)
     pos_list = pyautogui.locateAllOnScreen(
-        "macro_kakaotalk/date_version/images/kakao_input2.png", confidence=0.84)
+        "macro_kakaotalk/date_version/images/kakao_input2.png", confidence=0.88)
     pos_list = list(pos_list)
     sms_list_index = 0
 
@@ -546,27 +654,58 @@ def register_kakao_3(): # 인증번호 입력, 비밀번호 설정, 프로필 �
 
     interval_short()
 
-    # 멀티커맨드 활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_white.png', confidence=0.88))
-    pyautogui.moveTo(pos)
-    pyautogui.click()
-    pyautogui.hotkey('ctrl', '9')
-    interval_short()
+    # # 인증번호 입력 (화면 선택 갯수에 따른 인덱스 값 조정방법 생각)
+    # pos_list = pyautogui.locateAllOnScreen(
+    #     "macro_kakaotalk/date_version/images/kakao_input2.png", confidence=0.84)
+    # pos_list = list(pos_list)
+    # sms_list_index = 0
+
+    # for i in pos_list:
+
+    #     pos = pyautogui.center(i)
+    #     pyautogui.moveTo(pos)
+    #     pyautogui.click()
+    #     pyautogui.typewrite(sms_list[sms_list_index])
+    #     sms_list_index += 1
+
+    # interval_short()
+
+    # # 멀티커맨드 활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_white.png', confidence=0.88))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
 
     # 확인 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_ok5.png', confidence=0.88))
-    pyautogui.moveTo(pos)
-    pyautogui.click()
+    pos_list = pyautogui.locateAllOnScreen(
+        "macro_kakaotalk/date_version/images/kakao_ok5.png", confidence=0.88)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
     time.sleep(10)
 
-    # 비밀번호 클릭 및 입력
+    # # 확인 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_ok5.png', confidence=0.88))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # time.sleep(10)
+
+    # 멀티커맨드 활성화 / 비밀번호 클릭 및 입력
     pos = pyautogui.center(pyautogui.locateOnScreen(
         'macro_kakaotalk/date_version/images/kakao_pw1.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
-    pyautogui.typewrite("ehlswkdrnr1!")
+    pyautogui.hotkey('ctrl', '9')
+    interval_short()
+    pyautogui.typewrite("ehlswkdrnr!!")
     interval_short()
 
     # 비밀번호 확인 클릭 및 입력
@@ -574,22 +713,49 @@ def register_kakao_3(): # 인증번호 입력, 비밀번호 설정, 프로필 �
         'macro_kakaotalk/date_version/images/kakao_pw2.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
-    pyautogui.typewrite("ehlswkdrnr1!")
+    pyautogui.typewrite("ehlswkdrnr!!")
     interval_short()
 
-    # 확인 클릭
+    # 멀티커맨드 비활성화 / 확인 클릭
     pos = pyautogui.center(pyautogui.locateOnScreen(
-        'macro_kakaotalk/date_version/images/kakao_ok5.png', confidence=0.88))
+        'macro_kakaotalk/date_version/images/kakao_label2.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
+    interval_short()
+
+    pos_list = pyautogui.locateAllOnScreen(
+        "macro_kakaotalk/date_version/images/kakao_ok5.png", confidence=0.88)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
     time.sleep(10)
 
-    # 이름 클릭 및 입력
+    # # 확인 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'macro_kakaotalk/date_version/images/kakao_ok5.png', confidence=0.88))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # time.sleep(10)
+
+    # 멀티커맨드 활성화 / 이름 클릭 및 입력
     pos = pyautogui.center(pyautogui.locateOnScreen(
         'macro_kakaotalk/date_version/images/kakao_name.png', confidence=0.88))
     pyautogui.moveTo(pos)
     pyautogui.click()
-    pyautogui.typewrite("abc123")
+    pyautogui.hotkey('ctrl', '9')
+    interval_short()
+
+    pos = pyautogui.center(pyautogui.locateOnScreen(
+        'macro_kakaotalk/date_version/images/kakao_name.png', confidence=0.88))
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    pyautogui.typewrite("abcabc")
     interval_short()
 
     # 주소록 친구 자동 추가 클릭
@@ -657,13 +823,16 @@ def check_port(): # 포트 존재여부 확인
 
     bool_port = False # 포트 미존재
     rows = soup.find_all("div", {"class": "sx-form__item ip-port"})
+    country_lower = country.lower()
 
     for row in rows:
 
         row_country = row.find(
-            "div", {"class": "ip-port__country"}).get_text().strip()
+            "div", {"class": "ip-port__country"}).get_text().strip().replace(" ", "")
 
-        if (country == row_country):
+        row_country = row_country.lower()
+
+        if (country_lower == row_country):
 
             bool_port = True # 포트 존재
 
@@ -706,16 +875,19 @@ def get_port(): # 포트 가져오기
 
     port_list = []
     rows = soup.find_all("div", {"class": "sx-form__item ip-port"})
+    country_lower = country.lower()
 
     for row in rows:
 
         row_country = row.find(
-            "div", {"class": "ip-port__country"}).get_text().strip()
+            "div", {"class": "ip-port__country"}).get_text().strip().replace(" ", "")
+
+        row_country = row_country.lower()
 
         port = row.find(
             "div", {"class": "ip-port__info"}).get_text().strip()
 
-        if (country == row_country):
+        if (country_lower == row_country):
 
             port_list.append(row_country)
 
@@ -769,7 +941,7 @@ def add_phone(): # 전화번호 생성
     ActionChains(driver).move_to_element(elem).click().perform()
 
 
-def add_port(): # 포트 생성
+def add_port(): # 포트 생성, SMS 사이트와 PROXY 사이트 간의 이름 변환
 
     global driver, country, device
 
@@ -777,22 +949,24 @@ def add_port(): # 포트 생성
     elem = driver.find_element_by_css_selector(
         'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
     ActionChains(driver).click(elem).perform()
-    #time.sleep(0.5)
 
     # add filter click
     elem = driver.find_element_by_css_selector('.ip-port__add-new-text')
     ActionChains(driver).click(elem).perform()
-    #time.sleep(0.5)
 
     # country click
     elem = driver.find_element_by_css_selector('body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__body > div.sx-tabs__panel.ip-address-tab.is-active > form > div.content-row.sx-form__row.add-filter-container > div.sx-form__row-content.pckg-ip-port__filter-wrap > div.content-mwrap.flex.flex--wrap.targets-container.ip-port-targets > div:nth-child(2) > div > div > div')
     ActionChains(driver).click(elem).perform()
 
+    # country replace
+    if country == "Vietnam":
+        country = "Viet Nam"
+
+
     # country search click and sendkeys
     elem = driver.find_element_by_css_selector(
         'div.tooltip__inner > div.sx-select__search > input')
     ActionChains(driver).move_to_element(elem).send_keys(country).perform()
-    #time.sleep(1)
 
     # searched country click
     elem = driver.find_element_by_css_selector(
@@ -808,14 +982,6 @@ def add_port(): # 포트 생성
     # save button click
     elem = driver.find_element_by_css_selector('body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__body > div.sx-tabs__panel.ip-address-tab.is-active > form > div.content-row.sx-form__row.add-filter-container > div.sx-form__row-content.pckg-ip-port__filter-wrap > div.flex.flex--justify.flex--wrap.content-mwrap > button.button.button--04.package__form-btn.margin--t.add-filter-save')
     ActionChains(driver).move_to_element(elem).click().perform()
-
-    driver.get("https://dashboard.soax.com/proxy")
-
-    # ip address click
-    elem = driver.find_element_by_css_selector(
-        'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
-    ActionChains(driver).click(elem).perform()
-    #time.sleep(0.5)
 
 
 # 함수 선언 (GUI-tkinter))
@@ -871,12 +1037,22 @@ def add_btn2(): # 포트 생성
     if check_port(): # 포트 존재시
 
         get_port() # 포트 가져오기
+
         driver.get("https://sms-activate.ru/en/getNumber") # 추후 인증번호 가져오기를 위해 페이지 이동
 
     else: # 포트 미존재시
 
         add_port() # 포트 생성
+
+        driver.get("https://dashboard.soax.com/proxy")
+
+        # ip address click
+        elem = driver.find_element_by_css_selector(
+        'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
+        ActionChains(driver).click(elem).perform()
+
         get_port() # 포트 가져오기
+        
         driver.get("https://sms-activate.ru/en/getNumber") # 추후 인증번호 가져오기를 위해 페이지 이동
 
 
@@ -898,6 +1074,7 @@ def run_ld(): # 전화번호/포트 설정
 # GUI-tkinter 구성 및 실행
 window = Tk()
 window.title("카카오톡 계정생성기 [BETA]")
+window.geometry("420x300+0-40")
 
 # 전체 프레임
 frame_main = Frame(window)
