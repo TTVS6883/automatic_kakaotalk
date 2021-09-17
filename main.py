@@ -14,13 +14,14 @@ from datetime import datetime
 from datetime import timedelta
 import pyautogui
 import time
+import tkinter.messagebox as msgbox
 
 
 # cmd cd C:\Program Files\Google\Chrome\Application
 # cmd chrome.exe --remote-debugging-port=9222 --user-data-dir="C:/ChromeTemp"
 
 # 변수 선언
-global country_list, country, device, delay_page_var, delay_sms_var
+global country_list, country, device, delay_page_var, delay_sms_var, delay_openchat_var
 main_country_list = ['Africa', 'Asia',
                      'Europe', 'North America', 'South America']
 # ['Europe', 'Asia', 'Africa', 'North America', 'South America']
@@ -443,6 +444,8 @@ def exit_sim():  # 디바이스 에뮬레이터 국가 설정 저장
 
 def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, 카카오톡 실행, 권한허용, 회원가입 진입
 
+    state_update("카카오톡 가입을 시작합니다.")
+
     # launch_sim() 종료 후 exit_sim()으로 설정 저장 및 홈 화면 복귀
     exit_sim()
 
@@ -454,10 +457,11 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     interval_middle()
 
     # 이용안내 페이지 넘어갔는지 확인
-    global device, delay_page_var, delay_sms_var
+    global device, delay_page_var, delay_sms_var, delay_openchat_var
 
     delay_page_var = int(delay_page_var_combobox.get())
     delay_sms_var = int(delay_sms_var_combobox.get())
+    delay_openchat_var = int(delay_openchat_var_combobox.get())
 
     start_time = datetime.now()
     allow_bool = True
@@ -821,6 +825,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     global sms_list
 
     # 인증번호 가져오기
+    state_update("인증번호 리스트를 가져옵니다.")
+
     get_sms()
 
     # 인증번호 입력 (절대값 버전)
@@ -1105,7 +1111,7 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         try:
 
             pos_list = pyautogui.locateAllOnScreen(
-                "images/kakao_chat.png", confidence=0.87)
+                "images/kakao_chat1.png", confidence=0.87)
             pos_list = list(pos_list)
 
         except TypeError:
@@ -1115,12 +1121,25 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         if len(pos_list) == page_var:
             allow_bool = False
 
-        if datetime.now() - start_time > timedelta(seconds=delay_page_var*2):
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
             allow_bool = False
 
-    # 채팅 클릭
+    # 채팅 클릭1
     pos_list = pyautogui.locateAllOnScreen(
-        "images/kakao_chat.png", confidence=0.87)
+        "images/kakao_chat1.png", confidence=0.87)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
+    interval_short()
+
+    # 채팅 클릭2
+    pos_list = pyautogui.locateAllOnScreen(
+        "images/kakao_chat2.png", confidence=0.87)
     pos_list = list(pos_list)
 
     for i in pos_list:
@@ -1179,7 +1198,7 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         if len(pos_list) == page_var:
             allow_bool = False
 
-        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+        if datetime.now() - start_time > timedelta(seconds=delay_openchat_var):
             allow_bool = False
 
     # 오픈채팅 입장
@@ -1215,6 +1234,7 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
 
     interval_short()
 
+    state_update("카카오톡 가입이 완료되었습니다.")
 
 # 함수 선언 (셀레니움)
 def run_chrome():  # 크롬 실행
@@ -1511,7 +1531,7 @@ def add_set():  # 번호/포트 생성 및 설정 통합
 
 def add_set1():  # 번호/포트 생성
 
-    global country, device, driver, minimum_port
+    global country, device, driver, minimum_port, state_text
     country = country_list_combobox.get()
     device = device_var_combobox.get()
 
@@ -1519,15 +1539,29 @@ def add_set1():  # 번호/포트 생성
 
     driver.get("https://sms-activate.ru/en")
 
-    add_phone()
+    if country_check_var.get() == 1: # 번호 생성 체크시에만 작동
+
+        state_update("번호 생성을 시작합니다.")
+
+        add_phone()
 
     driver.get("https://dashboard.soax.com/proxy")
 
+    state_update("포트 유효성을 확인합니다.")
+
     if check_port():  # 포트 존재시
+
+        state_update("포트가 이미 존재합니다.")
+
+        state_update("포트 최소값을 가져옵니다.")
 
         get_port()  # 포트 가져오기
 
     else:  # 포트 미존재시
+
+        state_update("포트가 존재하지 않습니다.")
+
+        state_update("포트 생성을 시작합니다.")
 
         add_port()  # 포트 생성
 
@@ -1538,12 +1572,14 @@ def add_set1():  # 번호/포트 생성
             'body > div.page__wrapper.page__wrapper--with-subbar.packages > div.page__main-content.package > div.package__sect-twice > section:nth-child(1) > div.panel > div > div.sx-tabs__header > div:nth-child(2)')
         ActionChains(driver).click(elem).perform()
 
+        state_update("포트 최소값을 가져옵니다.")
+
         get_port()  # 포트 가져오기
 
     # 추후 인증번호 가져오기를 위해 페이지 이동
     driver.get("https://sms-activate.ru/en/getNumber")
 
-    print(minimum_port)
+    state_update("포트 최소값 : " + minimum_port)
 
 
 def add_set2():  # 번호/포트 설정
@@ -1554,23 +1590,52 @@ def add_set2():  # 번호/포트 설정
 
     run_selenium()
 
+    state_update("번호/포트 설정을 시작합니다.")
+
+    state_update("카카오톡 설정을 시작합니다.")
+
     launch_kakao()  # 카카오톡 실행 및 종료
 
     del_kakao()  # 카카오톡 강제종료 및 데이터 삭제
+
+    state_update("프록시 설정을 시작합니다.")
 
     del_proxy()  # 프록시 데이터 삭제
 
     launch_proxy()  # 프록시 실행 및 설정
 
+    state_update("번호 리스트를 가져옵니다.")
+
     get_number()  # 전화번호 가져오기
 
+    state_update("에뮬레이터 설정을 시작합니다.")
+
     launch_sim()  # 디바이스 에뮬레이터 실행 및 설정
+
+    state_update("국가 선택 후 카카오톡 가입 버튼을 눌러주세요.")
+
+
+def check_add_set():
+
+    if country_list_combobox.get() == "" or device_var_combobox.get() == "":
+
+        msgbox.showerror("오류", "국가/생성수 설정을 완료하세요.")
+
+    else:
+
+        add_set1()
+
+
+def state_update(text):
+    
+    state_text.insert(END, "[" + str(datetime.now().time())[:8] + "]" + " " + text + "\n")
+    state_text.see(END)
 
 
 # GUI-tkinter 구성 및 실행
 window = Tk()
 window.title("카카오톡 계정생성기 [BETA]")
-window.geometry("420x300+0-40")
+window.geometry("420x380+0-40")
 
 # 전체 프레임
 frame_main = Frame(window)
@@ -1605,10 +1670,16 @@ main_country_list_radiobtn5.pack(side="left")
 frame_top2 = LabelFrame(frame_top, text="국가/생성수")
 frame_top2.pack(fill="x", padx=5, pady=5)
 
+country_label = Label(frame_top2, text="국가")
+country_label.pack(side="left")
+
 country_list_combobox = ttk.Combobox(
-    frame_top2, height=20, width=28, state="readonly")
+    frame_top2, height=20, state="readonly")
 country_list_combobox.pack(side="left", fill="x", padx=5, pady=5)
 country = country_list_combobox.get()
+
+device_label = Label(frame_top2, text="생성수")
+device_label.pack(side="left")
 
 device_var_combobox = ttk.Combobox(
     frame_top2, height=20, state="readonly", values=device_var_list)
@@ -1616,43 +1687,56 @@ device_var_combobox.pack(side="left", fill="x", padx=5, pady=5)
 device = device_var_combobox.get()
 
 # 상단 옵션 프레임
-frame_delay = frame_bottom = LabelFrame(frame_top, text="대기시간")
+frame_delay = LabelFrame(frame_top, text="대기시간(초)")
 frame_delay.pack(fill="x", padx=5, pady=5)
 
-# 옵션 페이지 전환 대기시간 프레임
-frame_option1 = frame_bottom = Frame(frame_delay)
-frame_option1.pack(fill="x")
-
-delay_page_var_label = Label(frame_option1, text="페이지 전환 대기시간", width=18)
+delay_page_var_label = Label(frame_delay, text="페이지 전환")
 delay_page_var_label.pack(side="left")
 
 delay_page_var_list = ['10', '15', '20', '25', '30']
 delay_page_var_combobox = ttk.Combobox(
-    frame_option1, height=20, state="readonly", values=delay_page_var_list, width=40)
+    frame_delay, height=20, state="readonly", values=delay_page_var_list, width=4)
 delay_page_var_combobox.current(2)
 delay_page_var_combobox.pack(side="left", fill="x", padx=5, pady=5)
 delay_page_var = int(delay_page_var_combobox.get())
 
-# 옵션 SMS 인증 대기시간 프레임
-frame_option2 = frame_bottom = Frame(frame_delay)
-frame_option2.pack(fill="x")
-
-delay_sms_var_label = Label(frame_option2, text="SMS 인증 대기시간", width=18)
+delay_sms_var_label = Label(frame_delay, text="SMS 인증")
 delay_sms_var_label.pack(side="left")
 
 delay_sms_var_list = ['30', '40', '50', '60', '70', '80', '90']
 delay_sms_var_combobox = ttk.Combobox(
-    frame_option2, height=20, state="readonly", values=delay_sms_var_list, width=40)
+    frame_delay, height=20, state="readonly", values=delay_sms_var_list, width=4)
 delay_sms_var_combobox.current(3)
 delay_sms_var_combobox.pack(side="left", fill="x", padx=5, pady=5)
 delay_sms_var = int(delay_sms_var_combobox.get())
+
+delay_openchat_var_label = Label(frame_delay, text="오픈채팅 입장")
+delay_openchat_var_label.pack(side="left")
+
+delay_openchat_var_list = ['30', '40', '50', '60', '70', '80', '90']
+delay_openchat_var_combobox = ttk.Combobox(
+    frame_delay, height=20, state="readonly", values=delay_openchat_var_list, width=4)
+delay_openchat_var_combobox.current(1)
+delay_openchat_var_combobox.pack(side="left", fill="x", padx=5, pady=5)
+delay_openchat_var = int(delay_openchat_var_combobox.get())
+
+# 상단 번호/포트 생성
+port_check_var = IntVar()
+port_checkbox = Checkbutton(frame_top, text="포트 생성", variable=port_check_var, state="disabled")
+port_checkbox.select()
+port_checkbox.pack(side="right", padx=5, pady=5)
+
+country_check_var = IntVar()
+country_checkbox = Checkbutton(frame_top, text="번호 생성", variable=country_check_var)
+country_checkbox.select()
+country_checkbox.pack(side="right", padx=5, pady=5)
 
 # 하단 프레임
 frame_bottom = LabelFrame(frame_main, text="실행")
 frame_bottom.pack(fill="x", padx=5, pady=5)
 
 btn1 = Button(frame_bottom, text="번호/포트 생성",
-              command=add_set1, width=16, bg="#99CCFF")
+              command=check_add_set, width=16, bg="#99CCFF")
 btn1.pack(side="left", padx=5, pady=5)
 
 btn2 = Button(frame_bottom, text="번호/포트 설정",
@@ -1663,6 +1747,21 @@ btn3 = Button(frame_bottom, text="카카오톡 가입",
               command=register_kakao_1, width=16, bg="#99CCFF")
 btn3.pack(side="left", padx=5, pady=5)
 
+# 상태창 프레임
+frame_state = Frame(frame_main)
+frame_state.pack()
+
+state_scrollbar = Scrollbar(frame_state)
+state_scrollbar.pack(side="right", fill="y")
+
+state_text = Text(frame_state, height=5, yscrollcommand=state_scrollbar.set)
+state_text.pack()
+
+state_scrollbar.config(command=state_text.yview)
+
 # GUI 실행
 window.resizable(False, False)
 window.mainloop()
+
+    # state_text.insert(END, str(datetime.now().time())[:8] + " 번호/포트 생성을 시작합니다.\n")
+    # state_text.see(END)
