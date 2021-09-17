@@ -321,11 +321,13 @@ def launch_sim():  # 디바이스 에뮬레이터 실행 및 설정
     pyautogui.click()
     interval_middle()
 
+    pyautogui.press('up', 30)
+
     # IMEI 활성화 / 예외처리
     try:  # IMEI 비활성화 상태인 경우
 
         # IMEI 활성화
-        pyautogui.press('down', 3)
+        pyautogui.press('down', 2)
         pos = pyautogui.center(pyautogui.locateOnScreen(
             'images/sim_active.png', confidence=0.87))
         pyautogui.moveTo(pos)
