@@ -718,7 +718,7 @@ def launch_proxy():  # 프록시 실행 및 설정
     pyautogui.press('down', 2)
     interval_short()
 
-    # 포트 클릭
+    # 멀티커맨드 비활성화
     start_time = datetime.now()
     pos = None
 
@@ -727,7 +727,7 @@ def launch_proxy():  # 프록시 실행 및 설정
         try:
 
             pos = pyautogui.center(pyautogui.locateOnScreen(
-            'images/proxy_port1.png', confidence=0.87, region=(0,0,240,338)))
+            'images/proxy_label.png', confidence=0.87, region=(0,0,240,338)))
 
         except TypeError:
 
@@ -739,7 +739,44 @@ def launch_proxy():  # 프록시 실행 및 설정
 
     pyautogui.moveTo(pos)
     pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
     interval_short()
+
+    # 포트 클릭
+    pos_list = pyautogui.locateAllOnScreen(
+        "images/proxy_port1.png", confidence=0.87)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
+    interval_short()
+
+    # # 포트 클릭
+    # start_time = datetime.now()
+    # pos = None
+
+    # while pos is None:
+
+    #     try:
+
+    #         pos = pyautogui.center(pyautogui.locateOnScreen(
+    #         'images/proxy_port1.png', confidence=0.87, region=(0,0,240,338)))
+
+    #     except TypeError:
+
+    #         pass
+
+    #     if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+    #         break
+
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # # 포트 클릭
     # pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -747,6 +784,30 @@ def launch_proxy():  # 프록시 실행 및 설정
     # pyautogui.moveTo(pos)
     # pyautogui.click()
     # interval_short()
+
+    # 멀티커맨드 활성화
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_port2.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
+    interval_short()
 
     # 포트 입력 클릭
     start_time = datetime.now()
