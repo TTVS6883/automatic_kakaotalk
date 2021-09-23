@@ -1826,56 +1826,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         if datetime.now() - start_time > timedelta(seconds=delay_page_var):
             allow_bool = False
 
-    # # [필수]16세 이상 이용자입니다 클릭
-    # try:
-
-    #     # [필수]16세 이상 이용자입니다 클릭
-    #     pos_list = pyautogui.locateAllOnScreen(
-    #         "images/kakao_allow8.png", confidence=0.87)
-    #     pos_list = list(pos_list)
-
-    #     for i in pos_list:
-
-    #         pos = pyautogui.center(i)
-    #         pyautogui.moveTo(pos)
-    #         pyautogui.click()
-
-    #     interval_short()
-
-    # except TypeError:
-
-    #     pass
-
-    # # 확인 클릭
-    # pos_list = pyautogui.locateAllOnScreen(
-    #     "images/kakao_ok3.png", confidence=0.87)
-    # pos_list = list(pos_list)
-
-    # for i in pos_list:
-
-    #     pos = pyautogui.center(i)
-    #     pyautogui.moveTo(pos)
-    #     pyautogui.click()
-
-    # interval_short()
-
-     # 전화번호 확인 클릭
-    try:  # 확인 버튼 나오는 경우
-
-        # 확인 클릭
-        pos_list = pyautogui.locateAllOnScreen(
-            "images/kakao_ok3.png", confidence=0.87)
-        pos_list = list(pos_list)
-
-        for i in pos_list:
-
-            pos = pyautogui.center(i)
-            pyautogui.moveTo(pos)
-            pyautogui.click()
-
-        interval_short()
-
-    except TypeError:  # [필수]16세 이상 이용자입니다 나오는 경우
+    # [필수]16세 이상 이용자입니다 나오는 경우 클릭
+    try:
 
         # [필수]16세 이상 이용자입니다 클릭
         pos_list = pyautogui.locateAllOnScreen(
@@ -1890,18 +1842,68 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
 
         interval_short()
 
-        # 확인 클릭
-        pos_list = pyautogui.locateAllOnScreen(
-            "images/kakao_ok3.png", confidence=0.87)
-        pos_list = list(pos_list)
+    except TypeError:
 
-        for i in pos_list:
+        pass  
 
-            pos = pyautogui.center(i)
-            pyautogui.moveTo(pos)
-            pyautogui.click()
+    interval_short()
 
-        interval_short()
+    # 확인 클릭 (16세 이상 유무와 관계없이 동작)
+    pos_list = pyautogui.locateAllOnScreen(
+        "images/kakao_ok3.png", confidence=0.87)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
+    interval_short()
+
+    #  # 전화번호 확인 클릭
+    # try:  # 확인 버튼 나오는 경우
+
+    #     # 확인 클릭
+    #     pos_list = pyautogui.locateAllOnScreen(
+    #         "images/kakao_ok3.png", confidence=0.87)
+    #     pos_list = list(pos_list)
+
+    #     for i in pos_list:
+
+    #         pos = pyautogui.center(i)
+    #         pyautogui.moveTo(pos)
+    #         pyautogui.click()
+
+    #     interval_short()
+
+    # except TypeError:  # [필수]16세 이상 이용자입니다 나오는 경우
+
+    #     # [필수]16세 이상 이용자입니다 클릭
+    #     pos_list = pyautogui.locateAllOnScreen(
+    #         "images/kakao_allow8.png", confidence=0.87)
+    #     pos_list = list(pos_list)
+
+    #     for i in pos_list:
+
+    #         pos = pyautogui.center(i)
+    #         pyautogui.moveTo(pos)
+    #         pyautogui.click()
+
+    #     interval_short()
+
+    #     # 확인 클릭
+    #     pos_list = pyautogui.locateAllOnScreen(
+    #         "images/kakao_ok3.png", confidence=0.87)
+    #     pos_list = list(pos_list)
+
+    #     for i in pos_list:
+
+    #         pos = pyautogui.center(i)
+    #         pyautogui.moveTo(pos)
+    #         pyautogui.click()
+
+    #     interval_short()
 
     # 확인 클릭
     page_var = 0
