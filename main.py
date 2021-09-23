@@ -532,7 +532,7 @@ def launch_proxy():  # 프록시 실행 및 설정
 
     pyautogui.moveTo(pos)
     pyautogui.click()
-    interval_middle()
+    interval_long()
 
     # # 프록시 실행
     # pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -541,7 +541,7 @@ def launch_proxy():  # 프록시 실행 및 설정
     # pyautogui.click()
     # interval_middle()
 
-    # 1번 에뮬레이터 클릭
+    # 멀티커맨드 비활성화
     start_time = datetime.now()
     pos = None
 
@@ -562,7 +562,58 @@ def launch_proxy():  # 프록시 실행 및 설정
 
     pyautogui.moveTo(pos)
     pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
     interval_short()
+
+    # 각 에뮬레이터마다 하단 스크롤
+    pos_list = pyautogui.locateAllOnScreen(
+        "images/proxy_label.png", confidence=0.87)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+        pyautogui.press('down', 7)
+        interval_short()
+
+    interval_middle()
+
+    # 호스트 클릭
+    pos_list = pyautogui.locateAllOnScreen(
+        "images/proxy_host.png", confidence=0.90)
+    pos_list = list(pos_list)
+
+    for i in pos_list:
+
+        pos = pyautogui.center(i)
+        pyautogui.moveTo(pos)
+        pyautogui.click()
+
+    interval_short()
+
+    # # 1번 에뮬레이터 클릭
+    # start_time = datetime.now()
+    # pos = None
+
+    # while pos is None:
+
+    #     try:
+
+    #         pos = pyautogui.center(pyautogui.locateOnScreen(
+    #         'images/proxy_label.png', confidence=0.87, region=(0,0,240,338)))
+
+    #     except TypeError:
+
+    #         pass
+
+    #     if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+    #         break
+
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
 
     # # 1번 에뮬레이터 클릭
     # pos = pyautogui.center(pyautogui.locateOnScreen(
@@ -571,11 +622,41 @@ def launch_proxy():  # 프록시 실행 및 설정
     # pyautogui.click()
     # interval_short()
 
-    # 하단 스크롤
-    pyautogui.press('down', 7)
-    interval_short()
+    # # 하단 스크롤
+    # pyautogui.press('down', 7, 0.1)
+    # interval_middle()
 
-    # 호스트 클릭
+    # # 호스트 클릭
+    # start_time = datetime.now()
+    # pos = None
+
+    # while pos is None:
+
+    #     try:
+
+    #         pos = pyautogui.center(pyautogui.locateOnScreen(
+    #         'images/proxy_host.png', confidence=0.87, region=(0,0,240,338)))
+
+    #     except TypeError:
+
+    #         pass
+
+    #     if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+    #         break
+
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
+    # # 호스트 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_host.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
+    # 멀티커맨드 비활성화
     start_time = datetime.now()
     pos = None
 
@@ -584,7 +665,7 @@ def launch_proxy():  # 프록시 실행 및 설정
         try:
 
             pos = pyautogui.center(pyautogui.locateOnScreen(
-            'images/proxy_host.png', confidence=0.87, region=(0,0,240,338)))
+            'images/proxy_host1.png', confidence=0.87, region=(0,0,240,338)))
 
         except TypeError:
 
@@ -596,15 +677,8 @@ def launch_proxy():  # 프록시 실행 및 설정
 
     pyautogui.moveTo(pos)
     pyautogui.click()
+    pyautogui.hotkey('ctrl', '9')
     interval_short()
-    interval_short()
-
-    # # 호스트 클릭
-    # pos = pyautogui.center(pyautogui.locateOnScreen(
-    #     'images/proxy_host.png', confidence=0.87))
-    # pyautogui.moveTo(pos)
-    # pyautogui.click()
-    # interval_short()
 
     # 호스트 입력
     pyautogui.typewrite('proxy.soax.com')
@@ -641,7 +715,7 @@ def launch_proxy():  # 프록시 실행 및 설정
     # interval_short()
 
     # 하단 스크롤
-    pyautogui.press('down', 5)
+    pyautogui.press('down', 2)
     interval_short()
 
     # 포트 클릭
@@ -987,11 +1061,11 @@ def launch_sim():  # 디바이스 에뮬레이터 실행 및 설정
 
         except TypeError:  # IMEI 활성화 상태인 경우
 
-            pass
-
-        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
-           
             break
+
+        # if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+        #     break
 
     pyautogui.moveTo(pos)
     pyautogui.click()
@@ -1408,6 +1482,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     # interval_middle()
 
     # 이용안내 페이지 넘어갔는지 확인
+    state_update("권한허용을 진행합니다.")
+
     global device, delay_sms_var, delay_openchat_var
 
     delay_page_var = int(delay_page_var_combobox.get())
@@ -1455,7 +1531,7 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         except TypeError:
 
             pass
-        
+
         if datetime.now() - start_time > timedelta(seconds=delay_page_var):
            
             break
@@ -1525,7 +1601,7 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
 
     interval_short()
 
-    # 가입화면 넘어갔는지 확인
+    # 가입화면 넘어갔는지 확인\
     start_time = datetime.now()
     allow_bool = True
 
@@ -1561,6 +1637,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     interval_short()
 
     # 이용약관 페이지 넘어갔는지 확인
+    state_update("이용약관동의를 진행합니다.")
+
     start_time = datetime.now()
     allow_bool = True
 
@@ -1650,6 +1728,7 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     interval_short()
 
     # 동의하고 계속 진행합니다 클릭
+    page_var = 0
     pos_list = pyautogui.locateAllOnScreen(
         "images/kakao_allow7.png", confidence=0.87)
     pos_list = list(pos_list)
@@ -1659,6 +1738,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         pos = pyautogui.center(i)
         pyautogui.moveTo(pos)
         pyautogui.click()
+
+        page_var += 1
 
     interval_short()
 
@@ -1678,13 +1759,46 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
 
             pass
 
-        if len(pos_list) == device_count:
+        if len(pos_list) == page_var:
             allow_bool = False
 
         if datetime.now() - start_time > timedelta(seconds=delay_page_var):
             allow_bool = False
 
-    # 전화번호 확인 클릭
+    # # [필수]16세 이상 이용자입니다 클릭
+    # try:
+
+    #     # [필수]16세 이상 이용자입니다 클릭
+    #     pos_list = pyautogui.locateAllOnScreen(
+    #         "images/kakao_allow8.png", confidence=0.87)
+    #     pos_list = list(pos_list)
+
+    #     for i in pos_list:
+
+    #         pos = pyautogui.center(i)
+    #         pyautogui.moveTo(pos)
+    #         pyautogui.click()
+
+    #     interval_short()
+
+    # except TypeError:
+
+    #     pass
+
+    # # 확인 클릭
+    # pos_list = pyautogui.locateAllOnScreen(
+    #     "images/kakao_ok3.png", confidence=0.87)
+    # pos_list = list(pos_list)
+
+    # for i in pos_list:
+
+    #     pos = pyautogui.center(i)
+    #     pyautogui.moveTo(pos)
+    #     pyautogui.click()
+
+    # interval_short()
+
+     # 전화번호 확인 클릭
     try:  # 확인 버튼 나오는 경우
 
         # 확인 클릭
@@ -1744,6 +1858,22 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
 
     interval_short()
 
+    # # 확인 클릭
+    # page_var = 0
+    # pos_list = pyautogui.locateAllOnScreen(
+    #     "images/kakao_ok4.png", confidence=0.87)
+    # pos_list = list(pos_list)
+
+    # for i in pos_list:
+
+    #     pos = pyautogui.center(i)
+    #     pyautogui.moveTo(pos)
+    #     pyautogui.click()
+
+    #     page_var += 1
+
+    # interval_short()
+
     # # 인증번호 에러 뜨는 에뮬레이터 종료 / + 셀레니움에서 해당 sms 번호 어떻게 지울건지?
     # try: # 인증요청 제한횟수 나오는 경우
 
@@ -1795,6 +1925,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
             allow_bool = False
 
     # sms 전송 대기시간
+    state_update(str(delay_sms_var) + "초동안 대기합니다.")
+
     time.sleep(delay_sms_var)
 
     global sms_list
@@ -1803,6 +1935,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     state_update("인증번호 리스트를 가져옵니다.")
 
     get_sms()
+
+    state_update("인증번호를 입력합니다.")
 
     # 인증번호 입력 (절대값 버전)
     sms_list_index = 0
@@ -1912,6 +2046,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
             allow_bool = False
 
     # 비밀번호 클릭 및 입력
+    state_update("비밀번호를 입력합니다.")
+
     pos_list = pyautogui.locateAllOnScreen(
         "images/kakao_pw1.png", confidence=0.87)
     pos_list = list(pos_list)
@@ -1982,6 +2118,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
             allow_bool = False
 
     # 이름 클릭 및 입력
+    state_update("이름을 입력합니다.")
+
     pos_list = pyautogui.locateAllOnScreen(
         "images/kakao_name.png", confidence=0.87)
     pos_list = list(pos_list)
@@ -1998,6 +2136,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     interval_short()
 
     # 주소록 친구 자동 추가 해제 클릭
+    state_update("주소록 친구 자동 추가를 해제합니다.")
+
     pos_list = pyautogui.locateAllOnScreen(
         "images/kakao_allow9.png", confidence=0.87)
     pos_list = list(pos_list)
@@ -2024,6 +2164,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     interval_short()
 
     # 기본 이미지로 설정 클릭
+    state_update("기본 이미지로 설정합니다.")
+
     page_var = 0
     pos_list = pyautogui.locateAllOnScreen(
         "images/kakao_image.png", confidence=0.87)
@@ -2062,6 +2204,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
             allow_bool = False
 
     # 이메일 등록 나중에 하기 클릭
+    state_update("이메일 등록을 진행합니다.")
+
     page_var = 0
     pos_list = pyautogui.locateAllOnScreen(
         "images/kakao_later.png", confidence=0.87)
@@ -2100,6 +2244,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
             allow_bool = False
 
     # 채팅 클릭1
+    state_update("오픈채팅방에 진입합니다.")
+
     pos_list = pyautogui.locateAllOnScreen(
         "images/kakao_chat1.png", confidence=0.87)
     pos_list = list(pos_list)
@@ -2181,6 +2327,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     device_count = int(device)
 
     pyautogui.moveTo(90, 320)
+    pyautogui.scroll(-270)
+    interval_short()
     pyautogui.click()
 
     for_var = device_count - 1
@@ -2190,14 +2338,20 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         for i in range(7):
 
             pyautogui.dragRel(240)
+            pyautogui.scroll(-270)
+            interval_short()
             pyautogui.click()
 
         pyautogui.moveTo(90, 660)
+        pyautogui.scroll(-270)
+        interval_short()
         pyautogui.click()
 
         for i in range(for_var - 8):
 
             pyautogui.dragRel(240)
+            pyautogui.scroll(-270)
+            interval_short()
             pyautogui.click()
 
     elif for_var <= 7:
@@ -2205,6 +2359,8 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         for i in range(for_var):
 
             pyautogui.dragRel(240)
+            pyautogui.scroll(-270)
+            interval_short()
             pyautogui.click()
 
     interval_short()
@@ -2551,6 +2707,8 @@ def add_set1():  # 번호/포트 생성
 
         get_port()  # 포트 가져오기
 
+        interval_short()
+
     # 추후 인증번호 가져오기를 위해 페이지 이동
     driver.get("https://sms-activate.ru/en/getNumber")
 
@@ -2563,31 +2721,31 @@ def add_set2():  # 번호/포트 설정
     country = country_list_combobox.get()
     device = device_var_combobox.get()
 
-    # run_selenium()
+    run_selenium()
 
-    # state_update("번호/포트 설정을 시작합니다.")
+    state_update("번호/포트 설정을 시작합니다.")
 
     state_update("카카오톡 설정을 시작합니다.")
 
     launch_kakao()  # 카카오톡 실행 및 종료
 
-    # del_kakao()  # 카카오톡 강제종료 및 데이터 삭제
+    del_kakao()  # 카카오톡 강제종료 및 데이터 삭제
 
-    # state_update("프록시 설정을 시작합니다.")
+    state_update("프록시 설정을 시작합니다.")
 
-    # del_proxy()  # 프록시 데이터 삭제
+    del_proxy()  # 프록시 데이터 삭제
 
-    # launch_proxy()  # 프록시 실행 및 설정
+    launch_proxy()  # 프록시 실행 및 설정
 
-    # state_update("번호 리스트를 가져옵니다.")
+    state_update("번호 리스트를 가져옵니다.")
 
-    # get_number()  # 전화번호 가져오기
+    get_number()  # 전화번호 가져오기
 
-    # state_update("에뮬레이터 설정을 시작합니다.")
+    state_update("에뮬레이터 설정을 시작합니다.")
 
-    # launch_sim()  # 디바이스 에뮬레이터 실행 및 설정
+    launch_sim()  # 디바이스 에뮬레이터 실행 및 설정
 
-    # state_update("국가 선택 후 카카오톡 가입 버튼을 눌러주세요.")
+    state_update("국가 선택 후 카카오톡 가입 버튼을 눌러주세요.")
 
 
 def check_add_set():
@@ -2717,13 +2875,17 @@ btn1 = Button(frame_bottom, text="번호/포트 생성",
               command=check_add_set, width=16, bg="#99CCFF")
 btn1.pack(side="left", padx=5, pady=5)
 
-btn2 = Button(frame_bottom, text="번호/포트 설정",
-              command=add_set2, width=16, bg="#99CCFF")
-btn2.pack(side="left", padx=5, pady=5)
+# btn2 = Button(frame_bottom, text="포트 생성",
+#               command=check_add_set, width=16, bg="#99CCFF")
+# btn2.pack(side="left", padx=5, pady=5)
 
-btn3 = Button(frame_bottom, text="카카오톡 가입",
-              command=register_kakao_1, width=16, bg="#99CCFF")
+btn3 = Button(frame_bottom, text="번호/포트 설정",
+              command=add_set2, width=16, bg="#99CCFF")
 btn3.pack(side="left", padx=5, pady=5)
+
+btn4 = Button(frame_bottom, text="카카오톡 가입",
+              command=register_kakao_1, width=16, bg="#99CCFF")
+btn4.pack(side="left", padx=5, pady=5)
 
 # # 상태창 프레임
 # frame_state = Frame(frame_main)
