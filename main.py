@@ -61,181 +61,683 @@ def interval_long():  # 대기시간 6초
 
 def launch_kakao():  # 카카오톡 실행 및 종료
 
+    global delay_page_var
+
+    delay_page_var = int(delay_page_var_combobox.get())
+
     # 카카오톡 실행
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_middle()
 
     # 카카오톡 종료
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/home_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/home_icon.png', confidence=0.87, region=(0,0,240,338)))
+        
+        except TypeError:
+
+            pass
+        
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 카카오톡 실행
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_middle()
+
+    # # 카카오톡 종료
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/home_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
 
 def del_kakao():  # 카카오톡 강제종료 및 데이터 삭제
 
+    global delay_page_var
+
+    delay_page_var = int(delay_page_var_combobox.get())
+
     # 카카오톡 앱 정보 실행
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.dragRel(3, 0, 0.5, button='left')
     interval_short()
     interval_short()
 
+    # # 카카오톡 앱 정보 실행
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.dragRel(3, 0, 0.5, button='left')
+    # interval_short()
+    # interval_short()
+
     # 강제종료 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_exit.png', confidence=0.86))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_exit.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 강제종료 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_exit.png', confidence=0.86))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 확인 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_ok1.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_ok1.png', confidence=0.87, region=(0,0,240,338)))
+        
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
     interval_short()
+
+    # # 확인 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_ok1.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+    # interval_short()
 
     # 저장소 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_repository.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_repository.png', confidence=0.87, region=(0,0,240,338)))
+        
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 저장소 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_repository.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 데이터 지우기 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_delete.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_delete.png', confidence=0.87, region=(0,0,240,338)))
+
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 데이터 지우기 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_delete.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 확인 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_ok2.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_ok2.png', confidence=0.87, region=(0,0,240,338)))
+        
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 확인 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_ok2.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 홈 화면 복귀
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/home_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/home_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 홈 화면 복귀
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/home_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
 
 def del_proxy():  # 프록시 데이터 삭제
 
+    global delay_page_var
+
+    delay_page_var = int(delay_page_var_combobox.get())
+
     # 프록시 앱 정보 실행
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.dragRel(0, 3, 0.5, button='left')
     interval_short()
 
+    # # 프록시 앱 정보 실행
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.dragRel(0, 3, 0.5, button='left')
+    # interval_short()
+
     # 저장소 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_repository.png', confidence=0.86))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_repository.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 저장소 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_repository.png', confidence=0.86))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 데이터 지우기 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_delete.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_delete.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 데이터 지우기 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_delete.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 확인 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_ok1.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_ok1.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 확인 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_ok1.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 홈 화면 복귀
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/home_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/home_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 홈 화면 복귀
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/home_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
 
 def launch_proxy():  # 프록시 실행 및 설정
 
-    global minimum_port
+    global minimum_port, delay_page_var
+
+    delay_page_var = int(delay_page_var_combobox.get())
 
     # 프록시 실행
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+        
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_middle()
 
+    # # 프록시 실행
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_middle()
+
     # 1번 에뮬레이터 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_label.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_label.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 1번 에뮬레이터 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_label.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 하단 스크롤
     pyautogui.press('down', 7)
     interval_short()
 
     # 호스트 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_host.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_host.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+    interval_short()
+
+    # # 호스트 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_host.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 호스트 입력
     pyautogui.typewrite('proxy.soax.com')
     interval_short()
 
     # 확인 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_ok1.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_ok1.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 확인 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_ok1.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 하단 스크롤
     pyautogui.press('down', 5)
     interval_short()
 
     # 포트 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_port1.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_port1.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 포트 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_port1.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 포트 입력 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_input.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_input.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 포트 입력 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_input.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 기본값(3128) 제거
     pyautogui.press('backspace', 10)
 
     # 멀티커맨드 비활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_port2.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_port2.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     pyautogui.hotkey('ctrl', '9')
     interval_short()
+
+    # # 멀티커맨드 비활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_port2.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
 
     # 포트 입력
     pos_list = pyautogui.locateAllOnScreen(
@@ -254,32 +756,106 @@ def launch_proxy():  # 프록시 실행 및 설정
     interval_short()
 
     # 멀티커맨드 활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_port2.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_port2.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     pyautogui.hotkey('ctrl', '9')
     interval_short()
 
+    # # 멀티커맨드 활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_port2.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
+
     # 확인 클릭
+    start_time = datetime.now()
+    pos = None
+
     pyautogui.press('down')
     pyautogui.press('right')
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_ok1.png', confidence=0.87))
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_ok1.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 확인 클릭
+    # pyautogui.press('down')
+    # pyautogui.press('right')
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_ok1.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 상단 스크롤
     pyautogui.press('up', 7)
 
     # 멀티커맨드 비활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_label.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_label.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     pyautogui.hotkey('ctrl', '9')
     interval_short()
+
+    # # 멀티커맨드 비활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_label.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
 
     # 프록시 Enable / 광고 나오는 경우 때문에 locateAllOnScreen으로 처리
     pos_list = pyautogui.locateAllOnScreen(
@@ -295,84 +871,279 @@ def launch_proxy():  # 프록시 실행 및 설정
     interval_middle()
 
     # 멀티커맨드 활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/proxy_label.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/proxy_label.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     pyautogui.hotkey('ctrl', '9')
     interval_short()
 
+    # # 멀티커맨드 활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/proxy_label.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
+
     # 홈 화면 복귀
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/home_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/home_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 홈 화면 복귀
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/home_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
 
 def launch_sim():  # 디바이스 에뮬레이터 실행 및 설정
 
-    global phone_list
+    global phone_list, delay_page_var
+
+    delay_page_var = int(delay_page_var_combobox.get())
 
     # 디바이스 에뮬레이터 실행
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_middle()
-
     pyautogui.press('up', 30)
 
+    # # 디바이스 에뮬레이터 실행
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_middle()
+    # pyautogui.press('up', 30)
+
     # IMEI 활성화 / 예외처리
-    try:  # IMEI 비활성화 상태인 경우
+    start_time = datetime.now()
+    pos = None
+    
+    pyautogui.press('down', 2)
 
-        # IMEI 활성화
-        pyautogui.press('down', 2)
-        pos = pyautogui.center(pyautogui.locateOnScreen(
-            'images/sim_active.png', confidence=0.87))
-        pyautogui.moveTo(pos)
-        pyautogui.click()
-        interval_short()
+    while pos is None:
 
-    except TypeError:  # IMEI 활성화 상태인 경우
+        try:  # IMEI 비활성화 상태인 경우
 
-        pass
+                #IMEI 활성화
+                pos = pyautogui.center(pyautogui.locateOnScreen(
+                'images/sim_active.png', confidence=0.87, region=(0,0,240,338)))
 
-    # 랜덤 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_random.png', confidence=0.87))
+        except TypeError:  # IMEI 활성화 상태인 경우
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # IMEI 활성화 / 예외처리
+    # try:  # IMEI 비활성화 상태인 경우
+
+    #     # IMEI 활성화
+    #     pyautogui.press('down', 2)
+    #     pos = pyautogui.center(pyautogui.locateOnScreen(
+    #         'images/sim_active.png', confidence=0.87))
+    #     pyautogui.moveTo(pos)
+    #     pyautogui.click()
+    #     interval_short()
+
+    # except TypeError:  # IMEI 활성화 상태인 경우
+
+    #     pass
+
+    # 랜덤 클릭
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_random.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
+    pyautogui.moveTo(pos)
+    pyautogui.click()
+    interval_short()
+
+    # # 랜덤 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_random.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 핸드폰 번호 클릭
+    start_time = datetime.now()
+    pos = None
+
     pyautogui.press('down', 24)
     pyautogui.press('up', 4)
     pyautogui.press('left', 1)
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_edit2.png', confidence=0.87))
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_edit2.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 핸드폰 번호 클릭
+    # pyautogui.press('down', 24)
+    # pyautogui.press('up', 4)
+    # pyautogui.press('left', 1)
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_edit2.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 입력창 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_input.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_input.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 입력창 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_input.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
     # 기본값 제거
     pyautogui.press('backspace', 25)
     interval_short()
 
     # 멀티커맨드 비활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_mobile.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_mobile.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     pyautogui.hotkey('ctrl', '9')
     interval_short()
+
+    # # 멀티커맨드 비활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_mobile.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
 
     # 핸드폰 번호 입력
     pos_list = pyautogui.locateAllOnScreen(
@@ -391,60 +1162,215 @@ def launch_sim():  # 디바이스 에뮬레이터 실행 및 설정
     interval_short()
 
     # 멀티커맨드 활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_mobile.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_mobile.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     pyautogui.hotkey('ctrl', '9')
     interval_short()
 
+    # # 멀티커맨드 활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_mobile.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
+
     # 저장 클릭
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_save1.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_save1.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 저장 클릭
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_save1.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 국가 설정 진입
+    start_time = datetime.now()
+    pos = None
+
     pyautogui.press('down', 30)
     pyautogui.press('up', 2)
     pyautogui.press('left', 1)
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_edit2.png', confidence=0.87))
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_edit2.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 국가 설정 진입
+    # pyautogui.press('down', 30)
+    # pyautogui.press('up', 2)
+    # pyautogui.press('left', 1)
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_edit2.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 국가 클릭
+    start_time = datetime.now()
+    pos = None
+
     pyautogui.press('down', 2)
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_country.png', confidence=0.87))
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_country.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 국가 클릭
+    # pyautogui.press('down', 2)
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_country.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
 
 def exit_sim():  # 디바이스 에뮬레이터 국가 설정 저장
 
+    global delay_page_var
+
+    delay_page_var = int(delay_page_var_combobox.get())
+
     run_selenium()
 
     # 저장 클릭
+    start_time = datetime.now()
+    pos = None
+
     pyautogui.press('tab', 3)
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/sim_save2.png', confidence=0.87))
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/sim_save2.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
 
+    # # 저장 클릭
+    # pyautogui.press('tab', 3)
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/sim_save2.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
+
     # 홈 화면 복귀
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/home_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/home_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_short()
+
+    # # 홈 화면 복귀
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/home_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_short()
 
 
 def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, 카카오톡 실행, 권한허용, 회원가입 진입
+
+    global delay_page_var
+
+    delay_page_var = int(delay_page_var_combobox.get())
 
     state_update("카카오톡 가입을 시작합니다.")
 
@@ -452,18 +1378,40 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
     exit_sim()
 
     # 카카오톡 실행
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_icon.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_icon.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     interval_middle()
 
+    # # 카카오톡 실행
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_icon.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # interval_middle()
+
     # 이용안내 페이지 넘어갔는지 확인
-    global device, delay_page_var, delay_sms_var, delay_openchat_var
+    global device, delay_sms_var, delay_openchat_var
 
     delay_page_var = int(delay_page_var_combobox.get())
     delay_sms_var = int(delay_sms_var_combobox.get())
-    delay_openchat_var = int(delay_openchat_var_combobox.get())
 
     start_time = datetime.now()
     allow_bool = True
@@ -489,16 +1437,41 @@ def register_kakao_1():  # 디바이스 에뮬레이터 국가 설정 저장, �
         if datetime.now() - start_time > timedelta(seconds=delay_page_var):
             allow_bool = False
 
+
     # 하단 스크롤
     pyautogui.press('down', 5)
 
     # 멀티커맨드 비활성화
-    pos = pyautogui.center(pyautogui.locateOnScreen(
-        'images/kakao_label2_7.png', confidence=0.87))
+    start_time = datetime.now()
+    pos = None
+
+    while pos is None:
+
+        try:
+
+            pos = pyautogui.center(pyautogui.locateOnScreen(
+            'images/kakao_label2_7.png', confidence=0.87, region=(0,0,240,338)))
+
+        except TypeError:
+
+            pass
+        
+        if datetime.now() - start_time > timedelta(seconds=delay_page_var):
+           
+            break
+
     pyautogui.moveTo(pos)
     pyautogui.click()
     pyautogui.hotkey('ctrl', '9')
     interval_short()
+
+    # # 멀티커맨드 비활성화
+    # pos = pyautogui.center(pyautogui.locateOnScreen(
+    #     'images/kakao_label2_7.png', confidence=0.87))
+    # pyautogui.moveTo(pos)
+    # pyautogui.click()
+    # pyautogui.hotkey('ctrl', '9')
+    # interval_short()
 
     # 허용하기 클릭
     pos_list = pyautogui.locateAllOnScreen(
@@ -1590,31 +2563,31 @@ def add_set2():  # 번호/포트 설정
     country = country_list_combobox.get()
     device = device_var_combobox.get()
 
-    run_selenium()
+    # run_selenium()
 
-    state_update("번호/포트 설정을 시작합니다.")
+    # state_update("번호/포트 설정을 시작합니다.")
 
     state_update("카카오톡 설정을 시작합니다.")
 
     launch_kakao()  # 카카오톡 실행 및 종료
 
-    del_kakao()  # 카카오톡 강제종료 및 데이터 삭제
+    # del_kakao()  # 카카오톡 강제종료 및 데이터 삭제
 
-    state_update("프록시 설정을 시작합니다.")
+    # state_update("프록시 설정을 시작합니다.")
 
-    del_proxy()  # 프록시 데이터 삭제
+    # del_proxy()  # 프록시 데이터 삭제
 
-    launch_proxy()  # 프록시 실행 및 설정
+    # launch_proxy()  # 프록시 실행 및 설정
 
-    state_update("번호 리스트를 가져옵니다.")
+    # state_update("번호 리스트를 가져옵니다.")
 
-    get_number()  # 전화번호 가져오기
+    # get_number()  # 전화번호 가져오기
 
-    state_update("에뮬레이터 설정을 시작합니다.")
+    # state_update("에뮬레이터 설정을 시작합니다.")
 
-    launch_sim()  # 디바이스 에뮬레이터 실행 및 설정
+    # launch_sim()  # 디바이스 에뮬레이터 실행 및 설정
 
-    state_update("국가 선택 후 카카오톡 가입 버튼을 눌러주세요.")
+    # state_update("국가 선택 후 카카오톡 가입 버튼을 눌러주세요.")
 
 
 def check_add_set():
@@ -1630,14 +2603,17 @@ def check_add_set():
 
 def state_update(text):
     
-    state_text.insert(END, "[" + str(datetime.now().time())[:8] + "]" + " " + text + "\n")
-    state_text.see(END)
+    # state_text.insert(END, "[" + str(datetime.now().time())[:8] + "]" + " " + text + "\n")
+    # state_text.see(END)
+
+    txt =  "[" + str(datetime.now().time())[:8] + "]" + " " + text
+    print(txt)
 
 
 # GUI-tkinter 구성 및 실행
 window = Tk()
 window.title("카카오톡 계정생성기 [BETA]")
-window.geometry("420x380+0-40")
+window.geometry("420x310+0-40")
 
 # 전체 프레임
 frame_main = Frame(window)
@@ -1749,17 +2725,17 @@ btn3 = Button(frame_bottom, text="카카오톡 가입",
               command=register_kakao_1, width=16, bg="#99CCFF")
 btn3.pack(side="left", padx=5, pady=5)
 
-# 상태창 프레임
-frame_state = Frame(frame_main)
-frame_state.pack()
+# # 상태창 프레임
+# frame_state = Frame(frame_main)
+# frame_state.pack()
 
-state_scrollbar = Scrollbar(frame_state)
-state_scrollbar.pack(side="right", fill="y")
+# state_scrollbar = Scrollbar(frame_state)
+# state_scrollbar.pack(side="right", fill="y")
 
-state_text = Text(frame_state, height=5, yscrollcommand=state_scrollbar.set)
-state_text.pack()
+# state_text = Text(frame_state, height=5, yscrollcommand=state_scrollbar.set)
+# state_text.pack()
 
-state_scrollbar.config(command=state_text.yview)
+# state_scrollbar.config(command=state_text.yview)
 
 # GUI 실행
 window.resizable(False, False)
